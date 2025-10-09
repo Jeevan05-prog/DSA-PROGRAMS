@@ -29,7 +29,7 @@ int preced(char symbol)
         default: return 0;
     }
 }
-infixtopostfix(STACK *s,char infix[20])
+char infixtopostfix(STACK *s,char infix[20])
 {
     int i,j=0;
     char symbol,temp;
@@ -82,3 +82,4 @@ infixtopostfix(&s,infix);
 printf("\nPostfix expression is:%s",postfix);
 return 0;
 }
+
