@@ -1,66 +1,73 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include<stdio.h>
+#include<stdlib.h>
 #define SIZE 5
-int top=-1, data[SIZE];
+struct stack{
+    int top;
+    int data[SIZE];
+};
+typedef struct stack STACK;
 
-void push(int item)
+void push(STACK *s,int item)
 {
-    if(top==SIZE-1)
-        printf("\n Stack Overflow");
-    else{
-        top=top+1;
-        data[top]=item;
-        printf("Element pushed is:%d",data[top]);
+    if(s->top==SIZE-1)
+        printf("\nStack is Overflow");
+    else
+    {
+        s->top=s->top+1;
+        s->data[s->top]=item;
     }
 }
-void pop()
+
+void pop(STACK *s)
 {
-    if(top==-1)
-        printf("\nStack Underflow");
-    else{
-        printf("Element popped is:%d",data[top]);
-        top=top-1;
+    if(s->top==-1)
+        printf("\nStack is Under flow");
+    else
+    {
+        printf("\nThe element popped is:%d",s->data[s->top]);
+        s->top=s->top-1;
     }
 }
-void display()
+
+void display(STACK s)
 {
     int i;
-    if(top==-1)
+    if(s.top==-1)
         printf("\nStack is Empty");
-    else{
-        printf("\nstack Components are:\n");
-        for(i=top;i>=0;i--)
-        printf("%d\n",data[i]);
+    else
+    {
+        printf("\nStack contents are:");
+        for(i=s.top;i>=0;i--)
+            printf("%d\n",s.data[i]);
     }
-
+    
 }
 int main()
 {
-int ch,item,i,n;
-for(i=0;i<=n;i++)
-{
-    printf("\n1.PUSH");
-    printf("\n2.POP");
-    printf("\n3.DISPLAY");
-    printf("\n4.EXIT");
-    printf("\nRead Choice:");
-    scanf("%d",&ch);
-    switch(ch)
+    int ch,item;
+    STACK s;
+    s.top=-1;
+    for( ; ; )
     {
-        case 1: printf("\nRead element to be Pushed");
-                scanf("%d",&item);
-                push(item);
-                break;
-        case 2: printf("\nRead element to be Popped");
-                scanf("%d",&item);
-                pop(item);
-                break;
-        case 3: printf("\nRead element to be Displayed");
-                scanf("%d",&item);
-                display(item);
-                break;
-        case 4:exit(0);
-        defoult:exit(0);
+        printf("\n1.PUSH");
+        printf("\n2.POP");
+        printf("\n3.DISPLAY");
+        printf("\n4.EXIT");
+        printf("\nRead choice:");
+        scanf("%d",&ch);
+        switch(ch)
+        {
+            case 1: printf("\nEnter the item to be pushed:");
+                    scanf("%d",&item);
+                    push(&s,item);
+                    break;
+            case 2: pop(&s);
+                    break;
+            case 3: display(s);
+                    break;
+            case 4: exit(0);
+            default :printf("\nInvaild Entry");
+        }
     }
-}
+    
 }
